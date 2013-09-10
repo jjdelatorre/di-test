@@ -1,0 +1,55 @@
+# ************************************************************
+# Sequel Pro SQL dump
+# Version 4096
+#
+# http://www.sequelpro.com/
+# http://code.google.com/p/sequel-pro/
+#
+# Host: localhost (MySQL 5.6.11)
+# Database: kohana_test
+# Generation Time: 2013-09-10 23:12:46 +0000
+# ************************************************************
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8 */;
+/*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
+/*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
+/*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+
+# Dump of table articles
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `articles`;
+
+CREATE TABLE `articles` (
+  `id` int(11) unsigned NOT NULL AUTO_INCREMENT,
+  `title` varchar(80) DEFAULT NULL,
+  `author` varchar(100) DEFAULT '',
+  `body` text,
+  `timestamp` datetime DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+LOCK TABLES `articles` WRITE;
+/*!40000 ALTER TABLE `articles` DISABLE KEYS */;
+
+INSERT INTO `articles` (`id`, `title`, `author`, `body`, `timestamp`)
+VALUES
+	(1,'Rock !','JJ','Rock music is a genre of popular music that originated as \"rock and roll\" in the United States in the 1950s, and developed into a range of different styles in the 1960s and later, particularly in the United Kingdom and the United States.[1][2][3] It has its roots in 1940s\' and 1950s\' rock and roll, itself heavily influenced by rhythm and blues and country music. Rock music also drew strongly on a number of other genres such as blues and folk, and incorporated influences from jazz, classical and other musical sources.\n\nMusically, rock has centered around the electric guitar, usually as part of a rock group with bass guitar and drums. Typically, rock is song-based music usually with a 4/4 time signature utilizing a verse-chorus form, but the genre has become extremely diverse and common musical characteristics are difficult to define. Like pop music, lyrics often stress romantic love but also address a wide variety of other themes that are frequently social or political in emphasis. The dominance of rock by white, male musicians has been seen as one of the key factors shaping the themes explored in rock music. Rock places a higher degree of emphasis on musicianship, live performance, and an ideology of authenticity than pop music.\n','2013-09-10 00:00:00'),
+	(2,'Gospel','Alan','Gospel music is a music genre. The creation, performance, significance, and even the definition of gospel music varies according to culture and social context. Gospel music is composed and performed for many purposes, including aesthetic pleasure, religious or ceremonial purposes, and as an entertainment product for the marketplace.','2013-09-08 00:00:00');
+
+/*!40000 ALTER TABLE `articles` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+
+/*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
+/*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
+/*!40014 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS */;
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
