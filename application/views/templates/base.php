@@ -31,7 +31,8 @@
     <div class="container">
     	<?php include Kohana::find_file('views', $sub_view); ?>
     </div>
-	<?php echo HTML::script('application/assets/js/jquery-2.0.3.min.js');  ?>
+	<?php echo HTML::script('application/assets/js/jquery-2.0.3.min.js'); ?>
 	<?php echo HTML::script('application/assets/js/bootstrap.js');  ?>
+  <?php echo HTML::script('application/assets/js/knockout-2.3.0.js');?>
   </body>
 </html>
