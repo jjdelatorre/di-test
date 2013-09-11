@@ -16,6 +16,9 @@ class Model_Article extends ORM
             'author' => array(
                 array('not_empty'),
             ),
+            'body' => array(
+                array('not_empty'),
+            ),
         );
 	}
 }

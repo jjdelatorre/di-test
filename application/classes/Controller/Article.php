@@ -4,45 +4,68 @@ class Controller_Article extends Controller {
 
 	public function action_create()
 	{
-		$view = View::factory(Kohana::$config->load('site.templates.main'));
-
-		  // $view = View::factory('members/create')
-    //     ->set('values', $_POST)
-    //     ->bind('errors', $errors);
+		$view = View::factory(Kohana::$config->load('site.templates.main'))
+            ->set('form_values', $_POST)
+            ->bind('form_errors', $errors);
 
     	$view->title = Kohana::$config->load('site.title_preffix').'Create Article';
     	$view->sub_view = 'article_form';
 
 
-    	// if ($_POST)
-    	// {
-     //    $member = ORM::factory('Member')
-     //        // The ORM::values() method is a shortcut to assign many values at once
-     //        ->values($_POST, array('username', 'password'));
- 
-     //    $external_values = array(
-     //        // The unhashed password is needed for comparing to the password_confirm field
-     //        'password' => Arr::get($_POST, 'password'),
-     //    // Add all external values
-     //    ) + Arr::get($_POST, '_external', array());
-     //    $extra = Validation::factory($external_values)
-     //        ->rule('password_confirm', 'matches', array(':validation', ':field', 'password'));
- 
-     //    try
-     //    {
-     //        $member->save($extra);
-     //        // Redirect the user to his page
-     //        $this->request->redirect('members/'.$member->id);
-     //    }
-     //    catch (ORM_Validation_Exception $e)
-     //    {
-     //        $errors = $e->errors('models');
-     //    }
-    // }
+    	if ($_POST)
+    	{
+            $article = ORM::factory('Article')
+                ->values($_POST, array('title', 'author', 'body'));
+            $article->timestamp = date("Y-m-d H:i:s");
+     
+            try
+            {
+                $article->save();
+                $this->redirect('/home', 302);
+            }
+            catch (ORM_Validation_Exception $e)
+            {
+                $errors = $e->errors('models');
+            }
+        }
 
-        	$this->response->body($view);
+        $this->response->body($view);
 
 	}
+
+    public function action_edit()
+    {
+        $article = ORM::factory('Article', $this->request->param('id'));
+
+        $view = View::factory(Kohana::$config->load('site.templates.main'))
+            ->set('form_values', $article->as_array())
+            ->bind('form_errors', $errors);
+
+        $view->title = Kohana::$config->load('site.title_preffix').'Edit Article';
+        $view->sub_view = 'article_form';
+
+        if ($_POST)
+        {
+            $view->form_values = $_POST;
+            $article->title = Arr::get($_POST, 'title');
+            $article->author = Arr::get($_POST, 'author');
+            $article->body = Arr::get($_POST, 'body');
+            $article->timestamp = date("Y-m-d H:i:s");
+     
+            try
+            {
+                $article->save();
+                $this->redirect('/home', 302);
+            }
+            catch (ORM_Validation_Exception $e)
+            {
+                $errors = $e->errors('models');
+            }
+        }
+
+        $this->response->body($view);
+
+    }
 
 
 } // End Home
