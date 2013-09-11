@@ -7,6 +7,9 @@
     <?php echo HTML::style('application/assets/css/bootstrap.css');  ?>
     <?php echo HTML::style('application/assets/css/bootstrap-theme.css');  ?>
     <?php echo HTML::style('application/assets/css/app.css');  ?>
+    <script>
+      var g_base_url = <?php echo URL::site(); ?>
+    </script>
   </head>
   <body>
   	<div class="navbar navbar-inverse navbar-fixed-top">
@@ -34,5 +37,6 @@
 	<?php echo HTML::script('application/assets/js/jquery-2.0.3.min.js'); ?>
 	<?php echo HTML::script('application/assets/js/bootstrap.js');  ?>
   <?php echo HTML::script('application/assets/js/knockout-2.3.0.js');?>
+  <?php echo HTML::script('application/assets/js/app.js');?>
   </body>
 </html>

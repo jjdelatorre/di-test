@@ -67,5 +67,16 @@ class Controller_Article extends Controller {
 
     }
 
+    public function action_get_all()
+    {
+        $articles = ORM::factory('Article')->find_all()->as_array();
+        $articles_json = array();
+        foreach ($articles as $article) {
+            $articles_json[] =  $article->as_array();
+        }
+        echo json_encode($articles_json);
+        return;
+    }
+
 
 } // End Home
