@@ -24,7 +24,7 @@
         </div>
         <div class="collapse navbar-collapse">
           <ul class="nav navbar-nav">
-            <li class="active"><a href="<?php echo URL::site(); ?>">Home</a></li>
+            <li class="active"><a href="<?php echo URL::site(); ?>">Home (<span data-bind="text: articles().length"></span>)</a></li>
             <li><a href="<?php echo URL::site('article/create');?>">Create Article</a></li>
           </ul>
         </div><!--/.nav-collapse -->

@@ -69,12 +69,34 @@ class Controller_Article extends Controller {
 
     public function action_get_all()
     {
-        $articles = ORM::factory('Article')->find_all()->as_array();
-        $articles_json = array();
-        foreach ($articles as $article) {
-            $articles_json[] =  $article->as_array();
+        if ($this->request->param('id') == 'json')
+        {
+            $articles = ORM::factory('Article')->find_all()->as_array();
+            $articles_json = array();
+            foreach ($articles as $article) {
+                $articles_json[] =  $article->as_array();
+            }
+            echo json_encode($articles_json);
         }
-        echo json_encode($articles_json);
+        return;
+
+        
+    }
+
+    public function action_delete()
+    {
+        $article_id = json_decode($this->request->body())->article_id;
+        var_dump($this->request);
+        $article = ORM::factory('Article', $article_id);
+        if ($article->loaded())
+        {
+            //$article->delete();
+            echo json_encode(array('result' => 'ok'));  
+        }
+        else 
+        {
+            echo json_encode(array('result' => 'fail')); 
+        }        
         return;
     }
 
