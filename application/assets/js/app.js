@@ -4,6 +4,8 @@ function Article(data) {
     this.date = ko.observable(data.timestamp);
     this.body = ko.observable(data.body);
     this.id = ko.observable(data.id);
+    this.edit_url = window.g_base_url + "article/edit/" + data.id;
+    this.isEditable = ko.observable(false);
 }
 
 function ArticleListViewModel() {
@@ -15,15 +17,28 @@ function ArticleListViewModel() {
         self.articles(mappedArticles);
     });
 
-     self.deleteArticle = function(item) {
+    self.deleteArticle = function(item) {
         self.articles.remove(item);
 
-        $.ajax(g_base_url + "article/delete/json", {
+        $.ajax(g_base_url + "article/delete", {
             data: ko.toJSON({ article_id: item.id }),
             type: "post", contentType: "application/json",
             success: function(result) { console.log(result); }
         });
     };
+
+    self.editArticleField = function(item, event) {
+        console.log(item);
+        item.isEditable(true);
+    };
+
+    self.editArticle = function(item) {
+        $.ajax(g_base_url + "article/edit_from_json/", {
+            data: ko.toJSON({ article: item }),
+            type: "post", contentType: "application/json",
+            success: function(result) { console.log(result); item.isEditable(false); }
+        });
+    }
     
 }
 

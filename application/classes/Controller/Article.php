@@ -86,11 +86,10 @@ class Controller_Article extends Controller {
     public function action_delete()
     {
         $article_id = json_decode($this->request->body())->article_id;
-        var_dump($this->request);
         $article = ORM::factory('Article', $article_id);
         if ($article->loaded())
         {
-            //$article->delete();
+            $article->delete();
             echo json_encode(array('result' => 'ok'));  
         }
         else 
@@ -98,6 +97,38 @@ class Controller_Article extends Controller {
             echo json_encode(array('result' => 'fail')); 
         }        
         return;
+    }
+
+    public function action_edit_from_json()
+    {
+        $article_values = json_decode($this->request->body())->article;
+        $article = ORM::factory('Article', $article_values->id);
+        if ($article->loaded())
+        {
+            $article->title = $article_values->title;
+            $article->author = $article_values->author;
+            $article->body = $article_values->body;
+            $article->timestamp = $article_values->date;
+
+            try
+            {
+                $article->save();
+                echo json_encode(array('result' => 'ok'));
+            }
+            catch (ORM_Validation_Exception $e)
+            {
+                echo json_encode(array('result' => 'FAIL: '.$e->errors('models'))); 
+            }
+            
+
+        }
+        else 
+        {
+            echo json_encode(array('result' => 'Article Not Found')); 
+        }        
+        return;
+
+  
     }
 
 
